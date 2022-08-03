@@ -34,8 +34,6 @@ for l in lines:
     l = l.strip()
     l = l.split("\t")
 
-
-
     review.append(
         {"star" : l[0],
          "comment" : romoveEmoji(l[1]),
@@ -43,4 +41,3 @@ for l in lines:
 
 with open('review.json','w',encoding='utf-8') as f:
     json.dump(review, f, indent=4, ensure_ascii=False)
-# result_json = json.dumps(review)
