@@ -10,19 +10,16 @@ import json
 import re
 import pymysql
 
-f=open("db")
-pw = f.readline()
-f.close()
 
 with open("review.json",'r',encoding="UTF-8") as file:
     reviews = json.load(file)
 
 
 db = pymysql.connect(
-            host="localhost",
+            host="database-1.czlecdolrcj0.us-east-1.rds.amazonaws.com",
             port=3306,
             user='root',
-            password=pw,
+            password='12341234',
             db='kurly', charset='utf8', autocommit=True  # 실행결과확정
         )
 
@@ -32,3 +29,5 @@ sql = """INSERT INTO review (`star`, `comment`, `date`) VALUES (%s, %s, %s)"""
 reviews_query = [ (reviews[i]['star'], reviews[i]['comment'], reviews[i]['date']) for i in range(len(reviews))]
 
 cursor.executemany(sql, reviews_query)
+
+db.close()
