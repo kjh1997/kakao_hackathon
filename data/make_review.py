@@ -11,6 +11,8 @@ import random
 import re
 import time
 
+test_code = ""
+
 def str_time_prop(start, end, format, prop):
     stime = time.mktime(time.strptime(start, format))
     etime = time.mktime(time.strptime(end, format))
