@@ -7,9 +7,13 @@
 @Date ：2022-08-03 오전 10:52 
 '''
 import json
-import re
-import pymysql
+import time
 
+import pymysql
+from model import ReviewAnalysis
+
+m = ReviewAnalysis()
+m.createTokenizer()
 
 with open("review.json",'r',encoding="UTF-8") as file:
     reviews = json.load(file)
@@ -24,10 +28,20 @@ db = pymysql.connect(
         )
 
 cursor = db.cursor()
-sql = """INSERT INTO review (`star`, `comment`, `date`) VALUES (%s, %s, %s)"""
+sql = """INSERT INTO review (`star`, `comment`, `date`, `department`,`feedback`, `score`, `mu_keyword`, `correct`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
 
-reviews_query = [ (reviews[i]['star'], reviews[i]['comment'], reviews[i]['date']) for i in range(len(reviews))]
+start = time.time()
+print("start : ", start)
+
+reviews_query = []
+for i in range(len(reviews)):
+    if i % 100 == 0:
+        print("done : " , i)
+    analysis = m.sentiment_predict1(reviews[i]['comment'])
+    reviews_query.append( (reviews[i]['star'], reviews[i]['comment'], reviews[i]['date'],analysis['department'], int(analysis['feedback']), int(analysis['score']), analysis['review_word'], analysis['correct']) )
 
 cursor.executemany(sql, reviews_query)
+
+print("time : ", time.time() -start)
 
 db.close()
