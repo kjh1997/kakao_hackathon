@@ -9,11 +9,14 @@
 import json
 import pymysql
 from kafka import KafkaConsumer
+from kafka import KafkaProducer
+from json import dumps
 from model import ReviewAnalysis
 
 # kafka
+## consumer
 site = 'etl'
-bootstrap_servers = ['44.209.59.22']
+bootstrap_servers = ['52.44.127.67']
 consumer = KafkaConsumer(
             site,
             bootstrap_servers=bootstrap_servers,
@@ -23,6 +26,11 @@ consumer = KafkaConsumer(
             value_deserializer=lambda x: json.loads(x),
             max_poll_records=1,
             )
+## producer
+producer = KafkaProducer(
+    bootstrap_servers= bootstrap_servers,
+    value_serializer=lambda x: dumps(x).encode('utf-8')
+)
 
 # mysql
 db = pymysql.connect(
@@ -47,8 +55,20 @@ for msg in consumer:
     if "comment" in msg.value:
         review = json.loads(msg.value)
         result = m.sentiment_predict1(review['comment'])
-        print("star = %s, comment = %s, date = %s, department = %s, feedback = %s, score = %s, review_word = %s, correct = %s," % (review['star'], review['comment'], review['date'], result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct']))
-
+        data = (review['star'], review['comment'], review['date'], result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct'])
+        data_json ={
+            "star" : review['star'],
+            "comment": review['comment'],
+            "date": review['date'],
+            "department": result['department'],
+            "feedback": int(result['feedback']),
+            "score": int(result['score']),
+            "review_word": result['review_word'],
+            "correct": result['correct']
+        }
+        producer.send('complete', value=data)
+        producer.flush()
+        print("star = %s, comment = %s, date = %s, department = %s, feedback = %s, score = %s, review_word = %s, correct = %s," % data)
         print()
 
 

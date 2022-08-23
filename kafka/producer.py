@@ -30,14 +30,15 @@ import time
 
 
 producer = KafkaProducer(
-    bootstrap_servers= '44.209.59.22',
+    bootstrap_servers= '52.44.127.67',
     value_serializer=lambda x: dumps(x).encode('utf-8')
 )
 start = time.time()
-for i in range(10):
-    data = {'str' : 'result'+str(i),
-            "한글" : "테스트",
-            '왜': '안되누'}
+for i in range(3):
+    data = {
+        'str' : 'result'+str(i),
+        "한글" : "테스트"
+        }
     producer.send('etl', value=data)
     producer.flush()
 print("elapsed :", time.time() - start)

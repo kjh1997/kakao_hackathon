@@ -23,7 +23,7 @@ import json
 #     print(data)
 
 site = 'etl'
-bootstrap_servers = ['44.209.59.22']
+bootstrap_servers = ['52.44.127.67']
 consumer = KafkaConsumer(
             site,
             bootstrap_servers=bootstrap_servers,

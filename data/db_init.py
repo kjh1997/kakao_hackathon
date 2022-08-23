@@ -37,10 +37,17 @@ reviews_query = []
 for i in range(len(reviews)):
     if i % 100 == 0:
         print("done : " , i)
+    if i % 10000 == 0:
+        cursor.executemany(sql, reviews_query)
+        print("query done : ", i)
+        reviews_query= []
     analysis = m.sentiment_predict1(reviews[i]['comment'])
     reviews_query.append( (reviews[i]['star'], reviews[i]['comment'], reviews[i]['date'],analysis['department'], int(analysis['feedback']), int(analysis['score']), analysis['review_word'], analysis['correct']) )
 
-cursor.executemany(sql, reviews_query)
+if reviews_query:
+    cursor.executemany(sql, reviews_query)
+    print("query done")
+
 
 print("time : ", time.time() -start)
 
