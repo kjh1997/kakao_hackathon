@@ -12,6 +12,7 @@ from kafka import KafkaConsumer
 from kafka import KafkaProducer
 from json import dumps
 from model import ReviewAnalysis
+import time
 
 # kafka
 ## consumer
@@ -54,14 +55,14 @@ print("!!!!!!!!!!!!!!start consumer!!!!!!!!!!!!!!")
 for msg in consumer:
     if "comment" in msg.value:
         review = json.loads(msg.value)
-
+        current_date = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
         # predict
         result = m.sentiment_predict1(review['comment'])
-        data = (review['star'], review['comment'], review['date'], result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct'])
+        data = (review['star'], review['comment'], current_date, result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct'])
         data_json ={
             "star" : review['star'],
             "comment": review['comment'],
-            "date": review['date'],
+            "date": current_date,
             "department": result['department'],
             "feedback": int(result['feedback']),
             "score": int(result['score']),
@@ -74,6 +75,7 @@ for msg in consumer:
         producer.flush()
 
         # insert into db
+        cursor.execute(sql, data)
 
         print("star = %s, comment = %s, date = %s, department = %s, feedback = %s, score = %s, review_word = %s, correct = %s," % data)
         print()
