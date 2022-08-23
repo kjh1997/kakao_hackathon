@@ -23,7 +23,7 @@ consumer = KafkaConsumer(
             bootstrap_servers=bootstrap_servers,
             group_id='consumerGroupId',
             enable_auto_commit=False,
-            auto_offset_reset='earliest',
+            auto_offset_reset='latest',
             value_deserializer=lambda x: json.loads(x),
             max_poll_records=1,
             )
