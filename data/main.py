@@ -54,6 +54,8 @@ print("!!!!!!!!!!!!!!start consumer!!!!!!!!!!!!!!")
 for msg in consumer:
     if "comment" in msg.value:
         review = json.loads(msg.value)
+
+        # predict
         result = m.sentiment_predict1(review['comment'])
         data = (review['star'], review['comment'], review['date'], result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct'])
         data_json ={
@@ -66,8 +68,13 @@ for msg in consumer:
             "review_word": result['review_word'],
             "correct": result['correct']
         }
+
+        # send msg
         producer.send('complete', value=data)
         producer.flush()
+
+        # insert into db
+
         print("star = %s, comment = %s, date = %s, department = %s, feedback = %s, score = %s, review_word = %s, correct = %s," % data)
         print()
 

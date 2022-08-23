@@ -12,9 +12,10 @@ from pykospacing import Spacing
 from hanspell import spell_checker
 
 def check_spell_n_space(sentence):
-    spelled = spell_checker.check(sentence)
+    spacing = Spacing()
+    spacing_result = spacing(sentence)
+
+    spelled = spell_checker.check(spacing_result)
     spell_result = spelled.checked
 
-    spacing = Spacing()
-    spacing_result = spacing(spell_result)
-    return spacing_result
+    return spell_result
