@@ -55,7 +55,8 @@ print("!!!!!!!!!!!!!!start consumer!!!!!!!!!!!!!!")
 for msg in consumer:
     if "comment" in msg.value:
         review = json.loads(msg.value)
-        current_date = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+        current_date = str(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+
         # predict
         result = m.sentiment_predict1(review['comment'])
         data = (review['star'], review['comment'], current_date, result['department'], int(result['feedback']), int(result['score']), result['review_word'], result['correct'])
@@ -71,7 +72,7 @@ for msg in consumer:
         }
 
         # send msg
-        producer.send('complete', value=data)
+        producer.send('complete', value=data_json)
         producer.flush()
 
         # insert into db
