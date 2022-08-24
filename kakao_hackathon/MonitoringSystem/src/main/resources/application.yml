@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://database-1.czlecdolrcj0.us-east-1.rds.amazonaws.com:3306/kurly?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 12341234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # update create none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  level:
+    org:
+      hibernate:
+        type: trace
+elasticsearch:
+  host: 52.44.127.67
+  port: 9200
+
+
+kafka:
+  serverIP: 52.44.127.67:9092

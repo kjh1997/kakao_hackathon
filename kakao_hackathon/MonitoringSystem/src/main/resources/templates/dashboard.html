@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<div th:replace="fragments.html :: navbar"></div>
+<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding: 10px">
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'quality'}"
+            height="800" width="100%"> </iframe>
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'customerService'}"
+             height="800" width="100%"> </iframe>
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'delivery'}"
+             height="800" width="100%"> </iframe>
+</div>
+
+
+
+
+</body>
+
+
+</html>

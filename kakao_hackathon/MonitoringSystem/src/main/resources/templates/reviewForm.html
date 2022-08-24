@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head">
+    <title>Review</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
+    <style>
+        .container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<form role="form" th:object="${reviewDTO}" th:action="@{/review}" method="post" accept-charset="UTF-8">
+
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">상세 리뷰 작성</label>
+        <textarea class="form-control" th:field="*{comment}" id="exampleFormControlTextarea1" rows="3" required name="comment"></textarea>
+    </div>
+    <div style="float: left;">
+        <select class="form-select" aria-label="Default select example" id="star" name="star">
+            <option value="none">별점</option>
+            <option th:selected="${star}" value="1">★</option>
+            <option th:selected="${star}" value="2">★★</option>
+            <option th:selected="${star}" value="3">★★★</option>
+            <option th:selected="${star}" value="4">★★★★</option>
+            <option th:selected="${star}" value="5">★★★★★</option>
+        </select>
+    </div>
+        <div style="float: right;">
+        <button type="submit" class="btn btn-dark " onclick="checkStar()">리뷰 등록</button>
+        </div>
+
+</form>
+</body>
+</html>

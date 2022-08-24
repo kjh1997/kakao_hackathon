@@ -1,0 +1,77 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.9'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "com.github.node-gradle.node" version "3.1.0"
+}
+
+group = 'com.kjh'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	gradlePluginPortal()
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+dependencies {
+	// date
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// kafka
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	// npm
+	implementation 'com.github.node-gradle:gradle-node-plugin:3.1.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//querydsl 추가
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-apt'
+}
+
+tasks.named('test' 	) {
+	useJUnitPlatform()
+}
+
+node {
+	version = '16.3.0'
+	download = true
+	nodeModulesDir = file("${projectDir}/src/main/resources/static")
+
+}
+
+task copyFrontLib(type: Copy) {
+	from "${projectDir}/src/main/resources/static"
+	into "${projectDir}/build/resources/main/static/."
+}
+copyFrontLib.dependsOn npmInstall
+compileJava.dependsOn copyFrontLib

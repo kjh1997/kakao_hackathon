@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<div th:replace="fragments.html :: navbar"></div>
+
+
+
+<div sec:authorize="isAuthenticated()">
+
+</div >
+<div style="color:black; background=url('/main_logo.png')">
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-50 gradient-custom-3">
+        <div class="container h-200">
+            <div class="row d-flex justify-content-center align-items-center h-50">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card-body p-5">
+                            <button type="button" class="btn btn-primary" style="width:36%; height:25%; font-size:40pt; border: 1px solid; border-radius: 30%;"
+                            ><a href="/register" th:if="${name == null}" style="color: white; text-decoration: none;">NEW</a></button>
+
+                            <button type="button" class="btn btn-secondary" style="width:36%; height:25%; font-size:40pt; margin-left:180px; border: 1px solid; border-radius: 30%;">
+                                <a href="/login" th:if="${name == null}" style="color: white; text-decoration: none;">MEMBER</a></button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+</html>

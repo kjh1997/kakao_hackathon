@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<div th:replace="fragments.html :: navbar"></div>
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+        <h2>board list</h2>	<button type="button" class="btn btn-secondary btn-sm"><a href="/alarm/add">알람 등록</a></button>
+                            <table>		<colgroup>
+            <col style="width:15%;" />			<col style="width:auto;" />
+            <col style="width:15%;" />			<col style="width:10%;" />
+            <col style="width:10%;" />		</colgroup>
+                            <thead>
+                        <tr><th>키워드</th><th>긍정</th><th>점수</th><th>삭제</th></tr>
+        </thead>
+                        <tbody>
+                        <tr th:each="alarm : ${list}">
+                            <td th:text="${alarm.keyword}"></td>
+                            <td th:text="${alarm.feedback}"></td>
+                            <td th:text="${alarm.score}"></td>
+                            <td><a th:href="@{/alarm/delete(id=${alarm.id})}"
+                            style="color:black; text-decoration:none">삭제</a> </td>
+
+                        </tr>
+
+
+                        </tbody>
+                        </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

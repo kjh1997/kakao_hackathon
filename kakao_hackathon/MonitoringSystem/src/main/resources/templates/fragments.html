@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>MonitoringSystem</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
+  <style>
+        .container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<div th:fragment="navbar">
+  <nav class="navbar navbar-expand-lg navbar-light " style="margin:0px">
+    <div class="container-fluid">
+      <a class="navbar-brand btn-outline-success" href="/" th:href="@{/}">
+        <img src="/logo.jpg" width="200" height="50">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul class="navbar-nav" th:if="${name == null}">
+            <li class="nav-item" style="margin-left:30px; margin-right:30px; margin-top:5px">
+              <a class="nav-link active" aria-current="page" href="/review" style="font-size: 20px">Review</a>
+
+            </li>
+          </ul>
+          <ul class="navbar-nav" th:if="${name != null}">
+            <li class="nav-item" style="margin-left:30px; margin-right:30px; margin-top:5px">
+              <a class="nav-link active" aria-current="page" href="/review/list" style="font-size: 20px">Search</a>
+
+            </li>
+            <li class="nav-item" style="margin-left:30px; margin-right:30px; margin-top:5px">
+                <a class="nav-link active" aria-current="page" href="/alarm" style="font-size: 20px">Alram</a>
+
+
+
+            </li>
+            <li class="nav-item" style="margin-left:30px; margin-right:30px; margin-top:5px">
+                <a class="nav-link active" aria-current="page" href="/member" style="font-size: 20px">User</a>
+
+            </li>
+
+
+          </ul>
+          <div th:if="${name != null}">
+          <form class="d-flex">
+            <li class="nav-item" style="list-style-type : none">
+              <div class="btn-group dropstart">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="navbar-brand btn-outline-success">
+                    <img src="/white.jpg" width="30" height="30">
+                  </a>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else herafdasfasdfasfasfasdfasdfe</a></li>
+                </ul>
+              </div>
+
+
+            </li>
+          </form>
+        </div>
+        </div>
+    </div>
+  </nav>
+</div>
+
+</html>
