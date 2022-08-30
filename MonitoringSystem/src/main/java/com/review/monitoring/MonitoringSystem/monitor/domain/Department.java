@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Department {
-    DELIVERY(Arrays.asList(Keyword.전화, Keyword.주문, Keyword.교환, Keyword.고객, Keyword.품절,
+    delivery(Arrays.asList(Keyword.전화, Keyword.주문, Keyword.교환, Keyword.고객, Keyword.품절,
             Keyword.사람, Keyword.리뷰, Keyword.연락, Keyword.친절, Keyword.서비스, Keyword.판매자)),
-    CUSTOMER_SERVICE(Arrays.asList(Keyword.배송, Keyword.포장, Keyword.택배,
+    customerService(Arrays.asList(Keyword.배송, Keyword.포장, Keyword.택배,
             Keyword.발송, Keyword.도착, Keyword.배달, Keyword.주일, Keyword.평일, Keyword.주말)),
-    QUALITY(Arrays.asList(Keyword.사용, Keyword.제품,Keyword.가격, Keyword.저렴, Keyword.깔끔, Keyword.디자인,
+    quality(Arrays.asList(Keyword.사용, Keyword.제품,Keyword.가격, Keyword.저렴, Keyword.깔끔, Keyword.디자인,
             Keyword.상태, Keyword.추천, Keyword.색상, Keyword.재질, Keyword.고급, Keyword.퀄리티, Keyword.성능)),
     UCF(Collections.emptyList());
 

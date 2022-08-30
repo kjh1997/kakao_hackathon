@@ -35,7 +35,6 @@ public class AlarmServiceImpl implements AlarmService{
     public List<Member> getAlarmedMembers(Review review) {
         return alarmRepository.selectMembersByAlarm(review);
     }
-
     @Override
     @Transactional
     public void deleteAlarm(Long alarmId, Member member) {

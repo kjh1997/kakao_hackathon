@@ -25,7 +25,7 @@ class AlarmControllerTest {
     @Test
     @Transactional
     void addAlarmCondition() {
-        Member member = memberService.getMember(1L);
+        Member member = memberService.getMember("test");
         AlarmVO alarmVO = new AlarmVO();
         alarmVO.setFeedback(1L);
         alarmVO.setScore(69L);

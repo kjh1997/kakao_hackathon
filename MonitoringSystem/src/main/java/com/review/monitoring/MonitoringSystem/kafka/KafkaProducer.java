@@ -24,6 +24,7 @@ public class KafkaProducer {
 
         }
         System.out.println("kafka send");
+        System.out.println(review.getComment());
         kafkaTemplate.send(kafkaTopic, jsonInString);
         log.info("Kafka Producer send data from the Order microservice : " + review);
         System.out.println("kafka send complete");

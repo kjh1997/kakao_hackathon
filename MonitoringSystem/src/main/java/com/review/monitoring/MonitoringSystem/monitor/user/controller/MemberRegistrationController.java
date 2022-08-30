@@ -29,39 +29,46 @@ public class MemberRegistrationController {
         model.addAttribute("memberVO", new MemberVO());
         return "registerForm";
     }
+
+
+
     @PostMapping("/register")
     public String register(MemberVO memberVO) {
         System.out.println(memberVO.getDepartment());
-        Member member = new Member(memberVO.getNickname(), memberVO.getPassword(), memberVO.getEmail(), Department.valueOf("DELIVERY"));
+        Member member = new Member(memberVO.getNickname(), memberVO.getPassword(), memberVO.getEmail(), Department.valueOf(memberVO.getDepartment()));
 
         memberService.register(member);
         System.out.println("register success");
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 
     @PostMapping("/memberIdCheck")
-    public @ResponseBody String memberIdCheck(String nickname) {
-        System.out.println("nickname = " + nickname);
-        int result = memberService.checkDuplicateMember(nickname);
+    public @ResponseBody String memberIdCheck(@Valid Member member) {
+        int result = memberService.checkDuplicateMember(member.getNickname());
         if(result != 0) {
             return "fail";
         }
         return "success";
     }
-
+//<<<<<<< HEAD
+//=======
+//
 //    @PostMapping("/register")
-//    public String register(@Validated @ModelAttribute MemberVO memberVO,
+//    public String register(HttpServletRequest request,
+//                           @Validated @ModelAttribute MemberVO memberVO,
 //                           BindingResult bindingResult) {
 //        if(bindingResult.hasErrors()) {
 //            log.info("errors = {}",bindingResult);
 //            return "redirect:/registerForm";
 //        }
 //
-//        Member member = new Member(memberVO.getNickname(), memberVO.getPassword(), memberVO.getEmail(), Department.valueOf(memberVO.getDepartment()));
+//        Member member = new Member(memberVO.getId(), memberVO.getPassword(), memberVO.getEmail(), Department.valueOf(memberVO.getDepartment()));
 //        memberService.register(member);
-//        return "redirect:/login";
+//        memberVO.setPassword(null);
+//        HttpSession httpSession = request.getSession();
+//        httpSession.setAttribute(SessionConstants.LOGIN_MEMBER, memberVO);
+//        return "redirect:/";
 //    }
-
-
+//>>>>>>> 6a4fd382bdc4ed348a5200769db1f2d5a7e827cb
 }

@@ -10,6 +10,5 @@ public interface AlarmRepository {
     Alarm insert(Alarm alarm);
 
     List<Member> selectMembersByAlarm(Review review);
-
     void delete(Long alarmId);
 }

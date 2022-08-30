@@ -4,28 +4,15 @@
 <head th:replace="fragments.html :: head"></head>
 <body>
 <div th:replace="fragments.html :: navbar"></div>
-
-<ul class="nav nav-tabs" id="myTab" role="tablist" style="padding: 10px">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">배달 부서</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">고객 응대 부서</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">품질 부서</button>
-    </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding: 10px">
-        <iframe src="http://127.0.0.1:5601/app/dashboards#/view/2478c3a0-1465-11ed-8454-890fca51aa73?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2021-01-01T07:30:00.000Z',to:'2021-12-31T09:37:57.467Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:c5d82670-1544-11ed-b696-573a29b6212b,key:department.keyword,negate:!f,params:(query:quality),type:phrase),query:(match_phrase:(department.keyword:quality))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:c5d82670-1544-11ed-b696-573a29b6212b,key:feedback,negate:!f,params:(query:'0'),type:phrase),query:(match_phrase:(feedback:'0')))),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:Depart_Quality,viewMode:view)&show-query-input=true&show-time-filter=true"
-                height="800" width="1800">
-
-        </iframe>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding: 10px">
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'quality'}"
+            height="800" width="100%"> </iframe>
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'customerService'}"
+             height="800" width="100%"> </iframe>
+    <iframe  src="http://52.44.127.67:5601/goto/758dba088f24fbff16b8f7592092609f" th:if="${department == 'delivery'}"
+             height="800" width="100%"> </iframe>
 </div>
+
 
 
 

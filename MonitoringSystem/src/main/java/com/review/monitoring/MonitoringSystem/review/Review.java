@@ -1,7 +1,10 @@
 package com.review.monitoring.MonitoringSystem.review;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.review.monitoring.MonitoringSystem.monitor.domain.Department;
-import com.review.monitoring.MonitoringSystem.monitor.domain.Keyword;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,27 +19,29 @@ import java.time.LocalDateTime;
 @Setter
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private int star;
 
-    @Column(nullable = false)
     private LocalDateTime date;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Enumerated(EnumType.STRING)
     private Department department;
 
-    @Column(nullable = true)
     private int feedback;
 
-    @Column(nullable = true)
     private int score;
 
-    @Column(nullable = false)
     private String comment;
 
-    @Column(nullable = true)
-    private Keyword mu_keyword;
+    private String mu_keyword;
+
+    private String correct;
+
+    public void showData() {
+        System.out.println(this.getComment() + " | " + this.date + " | " + this.star);
+    }
 }

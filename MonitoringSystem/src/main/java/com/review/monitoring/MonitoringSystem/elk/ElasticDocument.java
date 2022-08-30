@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Setter
 @Getter
-@Document(indexName = "test7")
+@Document(indexName = "test14")
 @Builder
 public class ElasticDocument {
     @Id @GeneratedValue(strategy = IDENTITY)

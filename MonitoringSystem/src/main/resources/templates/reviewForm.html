@@ -17,20 +17,20 @@
 
 <body>
 
-<form role="form" action="/review/new" method="post" accept-charset="UTF-8">
+<form role="form" th:object="${reviewDTO}" th:action="@{/review}" method="post" accept-charset="UTF-8">
 
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">상세 리뷰 작성</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="comment"></textarea>
+        <textarea class="form-control" th:field="*{comment}" id="exampleFormControlTextarea1" rows="3" required name="comment"></textarea>
     </div>
     <div style="float: left;">
         <select class="form-select" aria-label="Default select example" id="star" name="star">
             <option value="none">별점</option>
-            <option value="1">★</option>
-            <option value="2">★★</option>
-            <option value="3">★★★</option>
-            <option value="4">★★★★</option>
-            <option value="5">★★★★★</option>
+            <option th:selected="${star}" value="1">★</option>
+            <option th:selected="${star}" value="2">★★</option>
+            <option th:selected="${star}" value="3">★★★</option>
+            <option th:selected="${star}" value="4">★★★★</option>
+            <option th:selected="${star}" value="5">★★★★★</option>
         </select>
     </div>
         <div style="float: right;">
@@ -40,13 +40,3 @@
 </form>
 </body>
 </html>
-<script>
-        function checkStar() {
-            var s = document.getElementById("star");
-            var option = s.options[s.selectedIndex].value;
-            if(option === "none") {
-                alert("별점은 필수 항목입니다.")
-                return;
-            }
-        }
-</script>

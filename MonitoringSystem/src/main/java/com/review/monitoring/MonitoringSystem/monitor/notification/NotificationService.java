@@ -6,6 +6,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 public interface NotificationService {
     SseEmitter subscribe(Long memberId, String lastEventId);
-    void send(Member receiver, Review review, String url);
+    void send(Member receiver, String content);
 
 }

@@ -14,10 +14,10 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public Long writeReview(Review review) {
-
+    public void writeReview(Review review) {
+        review.showData();
         kafkaProducer.send("etl", review);
         System.out.println("flush");
-        return reviewRepository.writeReview(review);
+
     }
 }

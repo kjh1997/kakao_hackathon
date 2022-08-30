@@ -9,7 +9,6 @@ import com.review.monitoring.MonitoringSystem.monitor.vo.AlarmVO;
 import com.review.monitoring.MonitoringSystem.monitor.vo.MemberVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -33,9 +32,9 @@ public class AlarmController {
         }
         UserDetails memberDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("memberDetail.getUsername() = " + memberDetail.getUsername());
-        List<Alarm> alarms = memberService.getMemberByName(memberDetail.getUsername()).getAlarms();
+        List<Alarm> alarms = memberService.getMember(memberDetail.getUsername()).getAlarms();
 
-        model.addAttribute(alarms);
+        model.addAttribute("list", alarms);
 
         return "alarm/alarmList";
     }
@@ -46,7 +45,7 @@ public class AlarmController {
             return "redirect:/";
         }
         UserDetails memberDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = memberService.getMemberByName(memberDetail.getUsername());
+        Member member = memberService.getMember(memberDetail.getUsername());
 
         model.addAttribute("alarmVO", new AlarmVO());
         model.addAttribute("keywords", member.getDepartment().getKeywords());
@@ -59,7 +58,7 @@ public class AlarmController {
             return "redirect:/";
         }
         UserDetails memberDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = memberService.getMemberByName(memberDetail.getUsername());
+        Member member = memberService.getMember(memberDetail.getUsername());
 
         Alarm alarm = alarmService.addAlarm(alarmVO, member);
         if(alarm != null) {
@@ -69,13 +68,13 @@ public class AlarmController {
         return "redirect:/alarm";
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteAlarm(@PathVariable("id") Long id) {
+    @GetMapping("delete")
+    public String deleteAlarm(@RequestParam Long id) {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser") {
             return "redirect:/";
         }
         UserDetails memberDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member selectedMember = memberService.getMemberByName(memberDetail.getUsername());
+        Member selectedMember = memberService.getMember(memberDetail.getUsername());
         alarmService.deleteAlarm(id,selectedMember);
         return "redirect:/alarm";
     }

@@ -1,10 +1,6 @@
 package com.review.monitoring.MonitoringSystem.monitor.domain;
 
-import com.review.monitoring.MonitoringSystem.monitor.vo.MemberVO;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,12 +8,12 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Member {
     @Id
     @Column(name = "member_id", nullable = false)
     @GeneratedValue
     private Long id;
+
     private String nickname;
     @Column(name ="password", nullable = false)
     private String password;
@@ -32,8 +28,10 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Alarm> alarms = new ArrayList<>();
 
-    public Member(String nickName, String password, String email, Department department) {
-        this.nickname = nickName;
+    public Member() {}
+
+    public Member(String Id, String password, String email, Department department) {
+        this.nickname = Id;
         this.password = password;
         this.email = email;
         this.department = department;
@@ -46,5 +44,4 @@ public class Member {
     public void deleteAlarm(Long alarmId) {
         alarms.removeIf(alarm -> alarm.getId().equals(alarmId));
     }
-
 }

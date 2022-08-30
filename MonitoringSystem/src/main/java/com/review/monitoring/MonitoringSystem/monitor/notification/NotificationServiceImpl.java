@@ -1,6 +1,7 @@
 package com.review.monitoring.MonitoringSystem.monitor.notification;
 
 import com.review.monitoring.MonitoringSystem.monitor.domain.Member;
+import com.review.monitoring.MonitoringSystem.review.NotificationRepository;
 import com.review.monitoring.MonitoringSystem.review.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void send(Member receiver, Review review, String content) {
-        Notification notification = notificationRepository.save(createNotification(receiver,review,content));
+    public void send(Member receiver, String content) {
+        Notification notification = notificationRepository.save(createNotification(receiver,content));
         String receiverId = String.valueOf(receiver.getId());
         String eventId = receiverId + "_" + System.currentTimeMillis();
         Map<String, SseEmitter> emitters = emitterRepository.findAllEmitterStartWithByMemberId(receiverId);
@@ -54,12 +55,11 @@ public class NotificationServiceImpl implements NotificationService {
         });
     }
 
-    private Notification createNotification(Member receiver, Review review, String content) {
+    private Notification createNotification(Member receiver, String content) {
         return Notification.builder()
                 .receiver(receiver)
                 .content(content)
-                .review(review)
-                .url("/reviews/" + review.getId())
+                .url("_blank")
                 .isRead(false)
                 .build();
     }

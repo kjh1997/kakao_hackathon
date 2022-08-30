@@ -12,13 +12,12 @@ import java.util.List;
 public class ReviewRepositoryImpl implements ReviewRepository{
     private final EntityManager em;
 
-//    public List<Review> getReviewData(){
-//        return em.createQuery("select r from Review r where r.feedback !=-1 and r.department != 'UCF'", Review.class)
-//                .getResultList();
-//    }
+    public List<Review> getReviewData(int start, int end){
+        return em.createQuery("select r from Review r where r.feedback !=-1 and r.department != 'UCF'", Review.class).setFirstResult(start)
+                .setMaxResults(end).getResultList();
+    }
 //
     public Long writeReview(Review review) {
-        em.persist(review);
         return review.getId();
     }
 }

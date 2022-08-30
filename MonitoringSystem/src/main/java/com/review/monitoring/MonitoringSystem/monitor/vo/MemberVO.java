@@ -1,6 +1,5 @@
 package com.review.monitoring.MonitoringSystem.monitor.vo;
 
-import com.review.monitoring.MonitoringSystem.monitor.domain.Member;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -20,12 +19,9 @@ public class MemberVO {
 
     }
 
-    public static MemberVO create(Member member) {
-        MemberVO memberVO = new MemberVO();
-        memberVO.setNickname(member.getNickname());
-        memberVO.setPassword(member.getPassword());
-        memberVO.setEmail(member.getEmail());
-        memberVO.setDepartment(member.getDepartment().toString());
-        return memberVO;
+    public MemberVO(String id, String email, String department) {
+        this.nickname = nickname;
+        this.email = email;
+        this.department = department;
     }
 }

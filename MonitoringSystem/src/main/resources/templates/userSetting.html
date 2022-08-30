@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+<div th:replace="fragments.html :: navbar"></div>
+<section class="vh-100 bg-image">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">회원 정보 관리</h2>
+              <div class="d-grid gap-2 col-6 mx-auto" style="width=40%">
+                <button type="submit"
+                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                        id="btnSubmit1" style="width=30%"
+                ><a href="/member/edit" style="text-decoration: none; color: black">회원 정보 수정</a></button>
+              </div>
+                <br>
+                <div class="d-grid gap-2 col-6 mx-auto" style="width=40%">
+                  <button type="submit"
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                          id="btnSubmit3" style="width=30%"
+                  ><a href="member/delete" style="text-decoration: none; color: black">회원 탈퇴</a></button>
+                </div><br>
+              <div class="d-grid gap-2 col-6 mx-auto" style="width=40%">
+                <button type="submit"
+                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                        id="btnSubmit" style="width=300px"
+                ><a href="/logout" style="text-decoration: none; color: black">로그아웃</a></button>
+              </div><br>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

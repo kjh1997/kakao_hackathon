@@ -44,7 +44,7 @@ function setNotification(id) {
                 // 브라우저 알림
                 const showNotification = () => {
 
-                    const notification = new Notification('알림 설정', {
+                    const notification = new Notification('설정하신 조건에 맞는 리뷰가 새로 등록되었습니다.', {
                         body: data.content
                     });
 

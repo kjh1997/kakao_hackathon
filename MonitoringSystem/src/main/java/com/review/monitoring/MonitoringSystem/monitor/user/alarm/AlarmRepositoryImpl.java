@@ -23,14 +23,13 @@ public class AlarmRepositoryImpl implements AlarmRepository{
     @Override
     public List<Member> selectMembersByAlarm(Review review) {
         return em.createQuery("SELECT m.member_id, m.department, m.email FROM member m join alarm a on m.member_id = a.member_id " +
-                        "where a.feedback = :/feedback or a.keyword = :/keyword or a.score >= :/score " +
+                        "where a.feedback = :feedback and a.keyword = :keyword and a.score >= :score " +
                         "group by m.member_id", Member.class)
                 .setParameter("feedback", review.getFeedback())
                 .setParameter("keyword", review.getMu_keyword())
                 .setParameter("score", review.getScore())
                 .getResultList();
     }
-
 
     @Override
     public void delete(Long alarmId) {

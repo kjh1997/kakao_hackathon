@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EnableScheduling
-@EnableJpaRepositories(basePackages = "com.review.monitoring.MonitoringSystem.monitor")
+@EnableJpaRepositories("com.review.monitoring.MonitoringSystem.review")
 @EnableElasticsearchRepositories(basePackages = "com.review.monitoring.MonitoringSystem.elk")
 public class MonitoringSystemApplication {
 
